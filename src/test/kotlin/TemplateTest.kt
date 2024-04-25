@@ -1,5 +1,5 @@
-import org.junit.jupiter.api.Assertions.*
-import org.junit.jupiter.api.Test
+import org.testng.Assert.assertTrue
+import org.testng.annotations.Test
 
 class TemplateTest {
     @Test
