@@ -46,7 +46,7 @@ class ChessCheckTest {
         val result = check.checkMate(arrayOf(
             arrayOf(' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '),
             arrayOf(' ', 'P', ' ', ' ', ' ', ' ', ' ', ' '),
-            arrayOf('K', ' ', ' ', ' ', ' ', ' ', ' ', ' '),
+            arrayOf(' ', ' ', 'K', ' ', ' ', ' ', ' ', ' '),
             arrayOf(' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '),
             arrayOf(' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '),
             arrayOf(' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '),
