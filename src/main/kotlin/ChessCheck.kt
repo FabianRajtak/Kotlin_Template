@@ -1,24 +1,37 @@
 class ChessCheck {
     fun checkMate(field: Array<Array<Char>>): Boolean {
         var pond = Figure(ChessFigureType.DEFAULT, 0, 0)
-        var knight: Figure
-        var king: Figure
+        var knight = Figure(ChessFigureType.DEFAULT, 0, 0)
+        var rook = Figure(ChessFigureType.ROOK, 0 ,0)
+        var king = Figure(ChessFigureType.DEFAULT, 0, 0)
 
-        var counter = 0
+        var amountOfFigures = 0
 
         for (array in field) {
             if (array.contains('P')) {
                 pond = Figure(ChessFigureType.POND, array.indexOf('P'), field.indexOf(array))
-                counter += 1
-            } else if (array.contains('N')) {
-                var knight = Figure(ChessFigureType.KNIGHT, array.indexOf('N'), field.indexOf(array))
-                counter += 1
-            } else if (array.contains('K')) {
-                var king = Figure(ChessFigureType.KING, array.indexOf('K'), field.indexOf(array))
-                counter += 1
+                amountOfFigures += 1
+            }
+
+            if (array.contains('N')) {
+                knight = Figure(ChessFigureType.KNIGHT, array.indexOf('N'), field.indexOf(array))
+                amountOfFigures += 1
+            }
+
+            if (array.contains('R')) {
+                rook = Figure(ChessFigureType.ROOK, array.indexOf('R'), field.indexOf(array))
+                amountOfFigures += 1
+            }
+
+            if (array.contains('K')) {
+                king = Figure(ChessFigureType.KING, array.indexOf('K'), field.indexOf(array))
+                amountOfFigures += 1
             }
         }
-        return counter > 1 && isInRange(pond, field)
+        return amountOfFigures > 1
+                && figureInRange(pond, field)
+                || figureInRange(knight, field)
+                || figureInRange(rook, field)
     }
 }
 
@@ -32,11 +45,11 @@ enum class ChessFigureType {
     KING,
     POND,
     KNIGHT,
+    ROOK,
     DEFAULT;
 }
 
-fun isInRange(figure: Figure, field: Array<Array<Char>>): Boolean {
-
+fun figureInRange(figure: Figure, field: Array<Array<Char>>): Boolean {
     when (figure.type) {
         ChessFigureType.POND -> {
             return when (figure.x) {
@@ -45,9 +58,14 @@ fun isInRange(figure: Figure, field: Array<Array<Char>>): Boolean {
                 else -> field[figure.y + 1][7].isLetter()
             }
         }
-        ChessFigureType.KING -> TODO()
-        ChessFigureType.KNIGHT -> TODO()
-        ChessFigureType.DEFAULT -> TODO()
+        ChessFigureType.KNIGHT -> {
+            return field[figure.y+2][figure.x-1] == 'K'
+        }
+        ChessFigureType.ROOK -> {
+
+        }
+
+        else -> { false }
     }
     return false
 }

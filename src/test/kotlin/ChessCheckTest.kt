@@ -91,4 +91,22 @@ class ChessCheckTest {
         // Then
         assertTrue(result)
     }
+
+    @Test
+    fun `is check when rook is in range`() {
+        // Given
+        val check = ChessCheck()
+        // When
+        val result = check.checkMate(arrayOf(
+            arrayOf(' ', 'N', ' ', ' ', ' ', 'P', ' ', ' '),
+            arrayOf(' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '),
+            arrayOf(' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '),
+            arrayOf(' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '),
+            arrayOf(' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '),
+            arrayOf(' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '),
+            arrayOf(' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '),
+            arrayOf('K', ' ', ' ', ' ', ' ', ' ', 'R', ' ')))
+        // Then
+        assertTrue(result)
+    }
 }
