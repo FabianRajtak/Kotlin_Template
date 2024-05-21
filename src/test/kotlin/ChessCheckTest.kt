@@ -18,27 +18,77 @@ class ChessCheckTest {
             arrayOf(' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ')))
         // Then
         assertFalse(result)
-
     }
 
     @Test
-    fun `is check when two figures given` () {
+    fun `is not check if pond is above`() {
         // Given
         val check = ChessCheck()
         // When
         val result = check.checkMate(arrayOf(
             arrayOf(' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '),
             arrayOf(' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '),
-            arrayOf(' ', ' ', 'K', ' ', ' ', ' ', ' ', ' '),
             arrayOf(' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '),
+            arrayOf(' ', ' ', ' ', ' ', 'K', ' ', ' ', ' '),
             arrayOf(' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '),
             arrayOf(' ', ' ', ' ', ' ', 'P', ' ', ' ', ' '),
             arrayOf(' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '),
             arrayOf(' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ')))
         // Then
-        assertTrue(result)
-
+        assertFalse(result)
     }
 
+    @Test
+    fun `is check when pond can beat king` () {
+        // Given
+        val check = ChessCheck()
+        // When
+        val result = check.checkMate(arrayOf(
+            arrayOf(' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '),
+            arrayOf(' ', 'P', ' ', ' ', ' ', ' ', ' ', ' '),
+            arrayOf('K', ' ', ' ', ' ', ' ', ' ', ' ', ' '),
+            arrayOf(' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '),
+            arrayOf(' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '),
+            arrayOf(' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '),
+            arrayOf(' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '),
+            arrayOf(' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ')))
+        // Then
+        assertTrue(result)
+    }
 
+    @Test
+    fun `is only check if king is in strike range` () {
+        // Given
+        val check = ChessCheck()
+        // When
+        val result = check.checkMate(arrayOf(
+            arrayOf(' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '),
+            arrayOf(' ', 'P', ' ', ' ', ' ', ' ', ' ', ' '),
+            arrayOf(' ', ' ', ' ', ' ', ' ', 'K', ' ', ' '),
+            arrayOf(' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '),
+            arrayOf(' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '),
+            arrayOf(' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '),
+            arrayOf(' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '),
+            arrayOf(' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ')))
+        // Then
+        assertFalse(result)
+    }
+
+    @Test
+    fun `is check with more than two figures`() {
+        // Given
+        val check = ChessCheck()
+        // When
+        val result = check.checkMate(arrayOf(
+            arrayOf(' ', 'N', ' ', ' ', ' ', 'P', ' ', ' '),
+            arrayOf(' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '),
+            arrayOf('K', ' ', ' ', ' ', ' ', ' ', ' ', ' '),
+            arrayOf(' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '),
+            arrayOf(' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '),
+            arrayOf(' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '),
+            arrayOf(' ', ' ', ' ', ' ', ' ', ' ', ' ', ' '),
+            arrayOf(' ', ' ', ' ', ' ', ' ', ' ', ' ', ' ')))
+        // Then
+        assertTrue(result)
+    }
 }
